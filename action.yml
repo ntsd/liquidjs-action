@@ -1,8 +1,8 @@
-name: "LiquidJS render action"
-description: "Github Action to render LiquidJS"
+name: "LiquidJS Render"
+description: "Render LiquidJS using Github Action"
 branding:
-  icon: "check-circle"
-  color: "red"
+  icon: "droplet"
+  color: "blue"
 inputs:
   variables:
     description: "The JSON variables to render."
