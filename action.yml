@@ -1,0 +1,24 @@
+name: "LiquidJS render action"
+description: "Github Action to render LiquidJS"
+branding:
+  icon: "check-circle"
+  color: "red"
+inputs:
+  variables:
+    description: "The JSON variables to render."
+    required: true
+  template-string:
+    description: "The template string to render."
+    required: false
+  template-file:
+    description: "The file template to render."
+    required: false
+  output-file:
+    description: "The rendered output file."
+    required: false
+  output-state:
+    description: "The output state name for the result."
+    required: false
+runs:
+  using: "node12"
+  main: "dist/index.js"
