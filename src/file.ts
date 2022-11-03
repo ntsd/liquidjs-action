@@ -10,13 +10,13 @@ export async function fileHandler(input: fileHandlerInput): Promise<string> {
   return new Promise((resolve, reject) => {
     fs.readFile(input.templateFile, "utf8", (err, data) => {
       if (err) {
-        reject(err)
-        return
+        reject(err);
+        return;
       }
 
       liquidJSRender(data, input.jsonVariables)
-        .then(result => resolve(result))
-        .catch(err => reject(err))
+        .then((result) => resolve(result))
+        .catch((err) => reject(err));
     });
   });
 }

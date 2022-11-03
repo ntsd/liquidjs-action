@@ -8,21 +8,21 @@ async function run() {
   const templateString = core.getInput("template-string", { required: false });
 
   const outputFile = core.getInput("output-file", { required: false });
-  const outputStateName = core.getInput("output-state", { required: false });
+  const outputName = core.getInput("output-name", { required: false });
 
   handler({
     jsonVariables,
     templateFile,
     templateString,
     outputFile,
-    outputStateName
+    outputName,
   })
     .then(() => {
-      core.info("liquidjs action run successful")
+      core.info("liquidjs action run successful");
     })
-    .catch(err => {
-      core.setFailed(err)
-    })
+    .catch((err) => {
+      core.setFailed(err);
+    });
 }
 
 run();

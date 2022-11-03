@@ -4,12 +4,6 @@ Name: `liquidjs-action`
 
 Github Action to render LiquidJS.
 
-## Template
-
-This action required a template file which it's required input `template-file` or `template-string`. The template  will render by [LiquidJS](https://liquidjs.com/).
-You can find the example template file [here](https://github.com/ntsd/liquidjs-action/blob/master/example/TEMPLATE.md).
-The template file will render to required input `output-file`.
-
 ## Inputs
 
 `variables` - The JSON variables to render.. `required`.
@@ -20,14 +14,20 @@ The template file will render to required input `output-file`.
 
 `output-file` - The rendered out put file. `optional`.
 
-`output-state` - The output state name for the result. `optional`.
+`output-name` - The output state name for the result. `optional`.
+
+## Template
+
+This action required template file or template string from input `template-file` or `template-string`. The template  will render by [LiquidJS](https://liquidjs.com/).
+You can find the example template file [here](https://github.com/ntsd/liquidjs-action/blob/master/example/TEMPLATE.md).
+The template file will render to file input `output-file` or [Github Action Output](https://docs.github.com/en/github-ae@latest/actions/using-workflows/workflow-commands-for-github-actions#using-workflow-commands-to-access-toolkit-functions) name from input `output-name`.
 
 ## Examples
 
-### Simple
+### File render
 
 ```yml
-name: Generate Github Profile
+name: Render LiquidJS
 on: push
 
 jobs:
@@ -38,13 +38,35 @@ jobs:
       - name: LiquidJS Action
         uses: ntsd/liquidjs-action@master
         with:
-          template-file: "./README.TEMPLATE.md"
-          output-file: "./README.md"
           variables: `{"hello": "Hello LiquidJS"}`
+          template-string: "{{ hello }}"
+          output-file: "./RENDER.md"
       - name: Commit files
         run: |
           git config --local user.email "ntsd@users.noreply.github.com"
           git config --local user.name "ntsd"
-          git commit -am "docs: auto update README.md"
+          git commit -am "docs: auto update RENDER.md"
           git push
+```
+
+### Github Action Output render
+
+```yml
+name: Render LiquidJS
+on: push
+
+jobs:
+  liquidjs-job:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: LiquidJS Action
+        id: run-liquidjs
+        uses: ntsd/liquidjs-action@master
+        with:
+          variables: `{"hello": "Hello LiquidJS"}`
+          template-string: "{{ hello }}"
+          output-name: "rendered-result"
+      - name: Echo output
+        run: echo "The rendered result is '${{ steps.run-liquidjs.outputs.rendered-result }}'"
 ```

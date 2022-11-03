@@ -16,8 +16,8 @@ inputs:
   output-file:
     description: "The rendered output file."
     required: false
-  output-state:
-    description: "The output state name for the result."
+  output-name:
+    description: "The Github Action output name for the result."
     required: false
 runs:
   using: "node12"
