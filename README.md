@@ -36,7 +36,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: LiquidJS Action
-        uses: ntsd/liquidjs-action@master
+        uses: ntsd/liquidjs-action@main
         with:
           variables: `{"hello": "Hello LiquidJS"}`
           template-string: "{{ hello }}"
@@ -62,7 +62,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: LiquidJS Action
         id: run-liquidjs
-        uses: ntsd/liquidjs-action@master
+        uses: ntsd/liquidjs-action@main
         with:
           variables: `{"hello": "Hello LiquidJS"}`
           template-string: "{{ hello }}"
