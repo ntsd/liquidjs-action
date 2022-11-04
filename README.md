@@ -1,12 +1,12 @@
 # LiquidJS Github Action
 
-Name: `liquidjs-action`
+Name: `ntsd/liquidjs-action@main`
 
 Github Action to render LiquidJS.
 
 ## Inputs
 
-`variables` - The JSON variables to render.. `required`.
+`variables` - The JSON variables to render. `required`.
 
 `template-string` - The template string to render. `optional`.
 
@@ -14,7 +14,7 @@ Github Action to render LiquidJS.
 
 `output-file` - The rendered out put file. `optional`.
 
-`output-name` - The output state name for the result. `optional`.
+`output-name` - The output state name for the result. default `result`.
 
 ## Template
 
@@ -23,6 +23,27 @@ You can find the example template file [here](https://github.com/ntsd/liquidjs-a
 The template file will render to file input `output-file` or [Github Action Output](https://docs.github.com/en/github-ae@latest/actions/using-workflows/workflow-commands-for-github-actions#using-workflow-commands-to-access-toolkit-functions) name from input `output-name`.
 
 ## Examples
+
+### Github Action Output render
+
+```yml
+name: Render LiquidJS
+on: push
+
+jobs:
+  liquidjs-job:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: LiquidJS Action
+        id: run-liquidjs
+        uses: ntsd/liquidjs-action@main
+        with:
+          variables: `{"hello": "Hello LiquidJS"}`
+          template-string: "{{ hello }}"
+      - name: Echo output
+        run: echo "The rendered result is '${{ steps.run-liquidjs.outputs.result }}'"
+```
 
 ### File render
 
@@ -47,26 +68,4 @@ jobs:
           git config --local user.name "ntsd"
           git commit -am "docs: auto update RENDER.md"
           git push
-```
-
-### Github Action Output render
-
-```yml
-name: Render LiquidJS
-on: push
-
-jobs:
-  liquidjs-job:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: LiquidJS Action
-        id: run-liquidjs
-        uses: ntsd/liquidjs-action@main
-        with:
-          variables: `{"hello": "Hello LiquidJS"}`
-          template-string: "{{ hello }}"
-          output-name: "rendered-result"
-      - name: Echo output
-        run: echo "The rendered result is '${{ steps.run-liquidjs.outputs.rendered-result }}'"
 ```

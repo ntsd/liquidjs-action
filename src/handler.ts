@@ -17,10 +17,6 @@ export async function handler(input: HandlerInput): Promise<void> {
       reject("should have at least 'template-file' or 'template-string' input");
       return;
     }
-    if (input.outputFile == "" && input.outputName == "") {
-      reject("should have at least 'output-file' or 'output-name' input");
-      return;
-    }
 
     if (input.templateFile != "") {
       fileHandler({

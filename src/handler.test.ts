@@ -46,16 +46,4 @@ describe("test handler", () => {
       "should have at least 'template-file' or 'template-string' input"
     );
   });
-
-  it("fail, outputFile and outputName are empty", () => {
-    expect(
-      handler({
-        jsonVariables: jsonVariables,
-        templateFile: "",
-        templateString: "{{ hello }}, {{ foo.bar }}",
-        outputFile: "",
-        outputName: "",
-      })
-    ).rejects.toBe("should have at least 'output-file' or 'output-name' input");
-  });
 });

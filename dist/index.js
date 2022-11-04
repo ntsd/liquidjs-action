@@ -5906,10 +5906,6 @@ function handler(input) {
                 reject("should have at least 'template-file' or 'template-string' input");
                 return;
             }
-            if (input.outputFile == "" && input.outputName == "") {
-                reject("should have at least 'output-file' or 'output-name' input");
-                return;
-            }
             if (input.templateFile != "") {
                 (0, file_1.fileHandler)({
                     templateFile: input.templateFile,
@@ -5993,7 +5989,7 @@ function run() {
         const templateFile = core.getInput("template-file", { required: false });
         const templateString = core.getInput("template-string", { required: false });
         const outputFile = core.getInput("output-file", { required: false });
-        const outputName = core.getInput("output-name", { required: false });
+        const outputName = core.getInput("output-name", { required: true });
         (0, handler_1.handler)({
             jsonVariables,
             templateFile,

@@ -8,7 +8,7 @@ async function run() {
   const templateString = core.getInput("template-string", { required: false });
 
   const outputFile = core.getInput("output-file", { required: false });
-  const outputName = core.getInput("output-name", { required: false });
+  const outputName = core.getInput("output-name", { required: true });
 
   handler({
     jsonVariables,

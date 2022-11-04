@@ -18,6 +18,7 @@ inputs:
     required: false
   output-name:
     description: "The Github Action output name for the result."
+    default: "result"
     required: false
 runs:
   using: "node12"
